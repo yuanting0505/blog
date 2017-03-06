@@ -1,7 +1,8 @@
 ---
 title: "从零开始学习React: 使用Yarn, Webpack和Babel来搭建环境"
 date: 2017-03-06 16:26:51
-tags:
+tags: [Programming, JavaScript, React]
+categories: programming
 ---
 
 ### 序言
