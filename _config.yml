@@ -71,3 +71,5 @@ deploy:
   type: git
   repo: https://github.com/yuanting0505/yuanting0505.github.io.git
   branch: master
+
+disqus_shortname: jasmineyuan  
