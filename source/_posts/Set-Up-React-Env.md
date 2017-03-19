@@ -78,7 +78,7 @@ categories: programming
 	<script src="public/bundle.js" type="text/javascript"></script>
 
 有热心网友遇到了以下错误：
-<img src="http://omcdckn46.bkt.clouddn.com/react-error.png" width="400px">
+<img src="http://omcdckn46.bkt.clouddn.com/react-error.png" width="600px">
 
 原因是把`bundle.js`放在了`head`里面，最好是放在`body`最下面，确保这个时候`DOM`里面已经有`id`为`root`的`div`了。如果一定想放在`head`里面，可以在`script`里面加一个`defer`的attribute。`defer`和`async`还有不加的区别可以参考[这篇文章](http://www.growingwiththeweb.com/2014/02/async-vs-defer-attributes.html)。
 	
@@ -146,7 +146,7 @@ categories: programming
 
 这个时候使用`webpack`来编译项目，发现如下错误：
 
-<img src="http://omcdckn46.bkt.clouddn.com/2.png" width=400px>
+<img src="http://omcdckn46.bkt.clouddn.com/2.png" width=600px>
 
 我们虽然指定了`babel-loader`来处理`jsx`文件，也安装了转换文件所需要的`babel-es2015`和`babel-react`，但我们在项目里并没有指定用这两个插件。因此，我们在根目录下添加`.babelrc`文件：
 
