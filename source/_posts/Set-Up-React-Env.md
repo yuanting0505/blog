@@ -76,7 +76,16 @@ categories: programming
 然后，我们把下面一行添加到`index.html`文件里面：
 
 	<script src="public/bundle.js" type="text/javascript"></script>
+
+有热心网友遇到了以下错误：
+<img src="http://omcdckn46.bkt.clouddn.com/react-error.png" width="400px">
+
+原因是把`bundle.js`放在了`head`里面，最好是放在`body`最下面，确保这个时候`DOM`里面已经有`id`为`root`的`div`了。如果一定想放在`head`里面，可以在`script`里面加一个`defer`的attribute。`defer`和`async`还有不加的区别可以参考[这篇文章](http://www.growingwiththeweb.com/2014/02/async-vs-defer-attributes.html)。
 	
+	<script src="public/bundle.js" defer type="text/javascript"></script>
+
+`defer`可以保证该`js`在`HTML`解析完成后，再进行执行。当然了，也可以把`ReactDOM.render`放进`$（document）.ready()`里面。	
+
 当前我们的项目结构如下：
 
 <img src="http://omcdckn46.bkt.clouddn.com/1.png" width="200px">
