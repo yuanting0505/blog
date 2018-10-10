@@ -13,9 +13,9 @@ categories: programming
 + 其他版本控制系统为中央集中式，中央保存所有修改，本地只有一份快照，如果要切换到其他version，需要与中央交互。
 + `SVN`追踪文件的变化，而`Git`的版本控制模型基于快照。比如说，一个`SVN`提交由仓库中原文件相比的差异（diff）组成。而`Git`在每次提交中记录文件的 完整内容。这让很多`Git`操作比`SVN`来的快得多，因为文件的某个版本不需要通过版本间的差异组装得到——每个文件完整的修改能立刻从`Git`的内部数据库中得到。
 
-<img src="http://omcdckn46.bkt.clouddn.com/git-vcs-structure.png" width=600px>
+<img src="http://omcdckn46.bkt.clouddn.com/git-vcs-structure.png" width=500px>
 
-<img src="http://omcdckn46.bkt.clouddn.com/git-vcs-checkin.png" width=600px>
+<img src="http://omcdckn46.bkt.clouddn.com/git-vcs-checkin.png" width=500px>
 
 ### 三个状态 Working Directory - Stage - Head
 + `Working Dir`: 本地工作目录
@@ -50,24 +50,24 @@ git clean -df  // 新添加的目录和文件
 
 #### `git rebase <basebranch>`
 + rebase就是说把base分支改成别的分支，也就是说本分支上做的改动在那个新的base上重做一次
-+ https://git-scm.com/book/zh/v2/Git-%E5%88%86%E6%94%AF-%E5%8F%98%E5%9F%BA 讲得很好
++ [这篇文章](https://git-scm.com/book/zh/v2/Git-%E5%88%86%E6%94%AF-%E5%8F%98%E5%9F%BA) 关于rebase讲得很好
 ```bash
 git checkout experiment
 git rebase master
 # master作为base，共同父亲c2到自己做的修改在master上重做一遍，做完还是在experiment上哟
 ```
-<img src="http://omcdckn46.bkt.clouddn.com/rebase.png" width=600px>
+<img src="http://omcdckn46.bkt.clouddn.com/rebase.png" width=500px>
 
 ### Git 内部实现
 #### Data Model
 + blob：用来存储文件内容，每次改变一个文件就形成新的blob
 + tree：解决了文件名-sha的对应问题，每个tree指向一系列blob和tree，可以把tree想成是一个directory
 + commit：用于储存commit信息，指向具体的tree节点
-<img src="http://omcdckn46.bkt.clouddn.com/git-data-model.png" width=600px>
+<img src="http://omcdckn46.bkt.clouddn.com/git-data-model.png" width=500px>
 
 #### Branching
 + 每个branch在git实现里就是一个指向last commit的文件，因为从last commit开始按照方向只能有一个history
-<img src="http://omcdckn46.bkt.clouddn.com/git-branching.png" width=500px>
+<img src="http://omcdckn46.bkt.clouddn.com/git-branching.png" width=400px>
 ```bash
 cat .git/refs/heads/master
 c641e4f0d19df0570667977edff860fed8f6c05a
@@ -82,7 +82,7 @@ ref: refs/heads/feature
 
 #### Index
 + index是个文件，里面记录了working directory/staging/repository的文件变化，当`git add`后，只是更新这些文件的变化
-<img src="http://omcdckn46.bkt.clouddn.com/git-states-change.png" width=600px>
+<img src="http://omcdckn46.bkt.clouddn.com/git-states-change.png" width=500px>
 
 ##### 实例讲解Index
 + 当`git checkout feature`的时候，发生的事情：
@@ -93,10 +93,10 @@ ref: refs/heads/feature
         + stage：当前staging上的文件版本
         + repo：当前repo的文件版本
     + 把working directory更新到这个commit所指向的文件内容
-<img src="http://omcdckn46.bkt.clouddn.com/git-index-cb.png" width=600px>
+<img src="http://omcdckn46.bkt.clouddn.com/git-index-cb.png" width=500px>
 
 + 当对`index.php`进行修改后，working dir中的文件mtime就发生了变化，此刻如果跑`git status`，wdir和mtime就发生了变化，这个命令会发现wdir和stage内容不同，就会告诉你这个文件进行了修改，但还没有stage
-<img src="http://omcdckn46.bkt.clouddn.com/git-index.png" width=600px>
+<img src="http://omcdckn46.bkt.clouddn.com/git-index.png" width=500px>
 
 ```bash
 On branch feature
@@ -108,13 +108,13 @@ no changes added to commit (use "git add" and/or "git commit -a")
 ```
 
 + 当`git add index.php`后，stage的值也会变成wdir的值，而且会为新文件创建blob文件
-<img src="http://omcdckn46.bkt.clouddn.com/git-index-2.png" width=600px>
+<img src="http://omcdckn46.bkt.clouddn.com/git-index-2.png" width=500px>
 
 + 当`git commit`后:
     + 会创建一个新的commit和tree object
     + 把feature指向新的commit
     + index中repo的值也会更新
-<img src="http://omcdckn46.bkt.clouddn.com/git-index-3.png" width=600px>
+<img src="http://omcdckn46.bkt.clouddn.com/git-index-3.png" width=500px>
 
 ### 关于合并repo的解决方案
 + `git filter-branch`用于对之前所有的记录进行修改，比如`git filter-branch --tree-filter 'rm -f passwords.txt'` HEAD会对每一次提交都先删除一个文件；`git filter-branch --commit-filter ....` HEAD又会对所有的commit进行遍历然后做修改
